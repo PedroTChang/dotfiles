@@ -76,4 +76,4 @@ end)
 
 vim.keymap.set("n", "-", "<cmd>Oil<CR>")
 vim.keymap.set('n', '<ESC>', ':noh<CR>', { silent = true })
-vim.keymap.set('n', '<leader>lg', ':term lazygit<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>lg', ':term lazygit<CR>i', { noremap = true, silent = true })
