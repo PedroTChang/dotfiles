@@ -9,7 +9,7 @@ export VISUAL=nvim
 export EDITOR=nvim
 export TERM="tmux-256color"
 
-export BROWSER="chrome"
+export BROWSER="firefox"
 
 # Directories
 
@@ -21,6 +21,7 @@ export LAB="$GHREPOS/lab"
 export SCRIPTS="$DOTFILES/scripts"
 export ICLOUD="$HOME/icloud"
 export SECONDBRAIN="$HOME/secondbrain"
+export KUBECONFIG=$(find $HOME/.kube/config -type f | tr '\n' ':')
 
 # Go related. In general all executables and scripts go in .local/bin
 
@@ -53,6 +54,8 @@ function get_os_paths() {
     esac
 }
 
+source $HOME/.asdf/asdf.sh
+
 path=(
     $path                           # Keep existing PATH entries
     $HOME/bin
@@ -60,7 +63,6 @@ path=(
     $HOME/.cargo
     $HOME/.cargo/env
     $HOME/.asdf
-    $HOME/.asdf/asdf.sh
     $SCRIPTS
     #$HOME/.krew/bin
     $HOME/.rd/bin                   # Rancher Desktop
@@ -73,8 +75,6 @@ typeset -U path
 path=($^path(N-/))
 
 export PATH
-
-
 
 # ~~~~~~~~~~~~~~~ Dev Container Specifics ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -112,6 +112,7 @@ alias ..="cd .."
 alias scripts='cd $SCRIPTS'
 alias lab='cd $LAB'
 alias dot='cd $GHREPOS/dotfiles/'
+alias home='cd $GHREPOS/homelab/'
 alias gr='cd $GHREPOS'
 alias mvdot='cd $REPOS/github.com/mischavandenburg/dotfiles'
 
@@ -135,8 +136,6 @@ alias kgp='kubectl get pods'
 alias kc='kubectx'
 alias kn='kubens'
 # autoload -U +X compinit && compinit
-# source <(kubectl completion zsh)
-# source <(kubectl completion zsh)
 # complete -o default -F __start_kubectl k
 
 alias kcs='kubectl config use-context admin@homelab-staging'
@@ -171,7 +170,7 @@ zstyle ':completion:*' menu select
 # source "$HOME/.privaterc"
 source <(fzf --zsh)
 
-#eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh)"
 
 # ~~~~~~~~~~~~~~~ Misc ~~~~~~~~~~~~~~~~~~~~~~~~
 
